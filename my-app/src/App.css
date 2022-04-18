@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  background-color:#BBBABA;
+  padding-left: 101px;
+  padding-right: 101px;
+  padding-bottom:144px;
+  border-top: 90px;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .App-logo {
@@ -35,4 +41,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+#register {
+  padding: 20px;
 }
