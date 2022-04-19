@@ -1,0 +1,44 @@
+small{
+    text-align: bottom;
+}
+
+#homepg{
+    background-color: #BBBABA;
+}
+
+#ultimofilmevisto{
+    width: auto;
+    margin-top: 80px;
+    margin-right: 800px;
+    padding: 10px;
+}
+
+#diretormaisvisto{
+    width: auto;
+    margin-top: -10px;
+    margin-right: 800px;
+    padding: 10px;
+}
+
+#generomaisvisto{
+    width: auto;
+    margin-top: 10px;
+    margin-right: 800px;
+    padding: 10px;
+}
+
+#contagemfilmes{
+    width: auto;
+    margin-top: -200px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: xx-large;
+}
+
+button{
+    margin-top: 40px;
+    font-size:x-large;
+    margin-right: auto;
+    margin-left: auto;
+}
