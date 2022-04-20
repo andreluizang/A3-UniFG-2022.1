@@ -15,7 +15,7 @@ small{
 
 #diretormaisvisto{
     width: auto;
-    margin-top: -10px;
+    margin-top: -95px;
     margin-right: 800px;
     padding: 10px;
 }
@@ -29,16 +29,30 @@ small{
 
 #contagemfilmes{
     width: auto;
-    margin-top: -200px;
+    margin-top: -290px;
     text-align: center;
     margin-right: auto;
     margin-left: auto;
     font-size: xx-large;
 }
 
-button{
+#novoFilme{
     margin-top: 40px;
     font-size:x-large;
     margin-right: auto;
     margin-left: auto;
+}
+
+#listafilmes{
+    width: auto;
+    margin-top: -250px;
+    margin-left: 800px;
+    padding: 10px;
+}
+
+#listaCompleta{
+    margin-top: 40px;
+    font-size:medium;
+    margin-right: auto;
+    margin-left: 925px;
 }
