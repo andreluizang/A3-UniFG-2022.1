@@ -1,6 +1,7 @@
 import './App.css';
 import RegisterForm from './Components/Register/RegisterForm';
 import Header from './Components/Register/Header';
+
 function App() {
   return (
     <div className="App">
