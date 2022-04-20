@@ -3,7 +3,8 @@ import './style.css';
 import UltimoFilme from './UltimoFilme.js';
 import Diretor from'./DiretorMaisVisto.js';
 import Genero from './GeneroMaisVisto.js';
-import Contagem from './ContagemFilmes.js';
+import Contagem from './ContagemFilmes.js'
+import Lista from './ListaFilmes';
 
 function HomePage(props) {
     const [state , setState] = useState({
@@ -24,8 +25,15 @@ function HomePage(props) {
     return(
         <div id="homepg" className="card col-12 col-sm-12 login-card mt-2 hv-center">
             <UltimoFilme/>
+            <Lista/>
+            <button id="listaCompleta"
+                type="submit" 
+                className="btn btn-primary"
+            >
+            Ver lista completa
+            </button>
             <Contagem/>
-            <button 
+            <button  id="novoFilme"
                 type="submit" 
                 className="btn btn-primary"
             >
