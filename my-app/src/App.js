@@ -4,7 +4,7 @@ import Header from './Components/Register/Header';
 
 function App() {
   return (
-    <div className="App">
+    <div className="Application">
       <Header/>
       <div className="container d-flex align-items-center flex-column">
           <RegisterForm/>

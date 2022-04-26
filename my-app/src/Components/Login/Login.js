@@ -41,7 +41,7 @@ function Login() {
               value={password}
               onChange={e => setPassword(e.target.value)}
               />
-              <span className="focus-input" data-placeholder="Password"></span>
+              <span className="focus-input" data-placeholder="Senha"></span>
             </div>
 
             <div className="link-register">
@@ -55,7 +55,7 @@ function Login() {
               className="login-form-btn" 
               onClick={handleSubmitClick}
               >
-                Login
+                Entrar
               </button>
             </div>
             
