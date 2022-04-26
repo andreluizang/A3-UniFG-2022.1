@@ -4,10 +4,12 @@ import './index.css';
 import App from './App';
 import Home from './Home'
 import reportWebVitals from './reportWebVitals';
+import Login from './Login';
+import RegisterForm from './Components/Register/RegisterForm';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RegisterForm />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,83 +1,85 @@
-import React, {useState} from 'react';
-function RegistrationForm(props) {
-    const [state , setState] = useState({
-        usuario : "",
-        email : "",
-        password : "",
-        confirmPassword: "",
-    })
-    
-    const handleChange = (e) => {
-        const {id , value} = e.target   
-        setState(prevState => ({
-            ...prevState,
-            [id] : value
-        }))
-    }
-   
-    const handleSubmitClick = (e) => {
-        e.preventDefault();
-        if(state.password === state.confirmPassword) {
-            alert('Ok, the password and confirmPassword are equals! ')    
-        } else {
-            alert('Passwords do not match');
-        }
-    }
-    
-    return(
-        <div id="register" className="card col-12 col-xl-6 login-card mt-2 hv-center">
-                <form>
-                <div className="form-group text-left">
-                    <label htmlFor="exampleInputText1"><b>Usuário:</b></label>
-                    <input type="text" 
-                        className="form-control" 
-                        id="usuario" 
-                        placeholder="Digite seu usuário"
-                        value={state.usuario}
-                        onChange={handleChange}
-                    />
-                </div>
+import React, { useState } from "react";
 
-                <div className="form-group text-left">
-                <label htmlFor="exampleInputEmail1"><b>E-mail:</b></label>
-                <input type="email" 
-                       className="form-control" 
-                       id="email" 
-                       aria-describedby="emailHelp" 
-                       placeholder="Digite seu e-mail"
-                       value={state.email}
-                       onChange={handleChange}
-                />
-                <small id="emailHelp" className="form-text text-muted">Nunca compartilharemos seu e-mail.</small>
-                </div>
-                <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1"><b>Senha:</b></label>
-                    <input type="password" 
-                        className="form-control" 
-                        id="password" 
-                        value={state.password}
-                        onChange={handleChange} 
-                    />
-                </div>
-                <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1"><b>Confirme sua senha:</b></label>
-                    <input type="password" 
-                        className="form-control" 
-                        id="confirmPassword" 
-                        value={state.confirmPassword}
-                        onChange={handleChange}
-                    />
-                </div>
-                <button 
-                    type="submit" 
-                    className="btn btn-primary"
-                    onClick={handleSubmitClick}
-                >
-                    Register
-                </button>
-            </form>
+function RegisterForm() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+
+  const handleSubmitClick = (e) => {
+    e.preventDefault();
+    if(email !== "" && password !== ""){
+      console.log(email)
+      console.log(password)
+      console.log(confirmPassword)
+      if(password==confirmPassword){
+          alert("Cadastro realizado com sucesso!")
+      }else{
+          alert("As senhas não são iguais!")
+      }
+    }
+    else{
+      window.alert("Digite um email e/ou senha")
+    }
+  }
+
+  return (
+    <div className="container">
+      <div className="container-login">
+        <div className="wrap-login">
+          <form className="login-form">
+
+            <span className="login-form-title">Cadastre-se!</span>
+
+            <div className="wrap-input">
+              <input 
+              className={email !== "" ? "has-val input" : "input"} 
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              />
+              <span className="focus-input" data-placeholder="Email"></span>
+            </div>
+
+            <div className="wrap-input">
+              <input 
+              className={password !== "" ? "has-val input" : "input"} 
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              />
+              <span className="focus-input" data-placeholder="Senha"></span>
+            </div>
+
+            <div className="wrap-input">
+              <input 
+              className={confirmPassword !== "" ? "has-val input" : "input"} 
+              type="password"
+              value={confirmPassword}
+              onChange={e => setConfirmPassword(e.target.value)}
+              />
+              <span className="focus-input" data-placeholder="Confirme sua senha"></span>
+            </div>
+
+            <div className="link-register">
+              <span className="txt1">Já tem uma conta?</span>
+
+              <a className="txt2" href="#">Faça login!</a>
+            </div>
+
+            <div className="container-login-form-btn">
+              <button 
+              className="login-form-btn" 
+              onClick={handleSubmitClick}
+              >
+                Registrar
+              </button>
+            </div>
+            
+          </form>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
-export default RegistrationForm
+export default RegisterForm;
