@@ -6,10 +6,11 @@ import Home from './Home'
 import reportWebVitals from './reportWebVitals';
 import Login from './Login';
 import RegisterForm from './Components/Register/RegisterForm';
+import PerfilPage from './Perfil';
 
 ReactDOM.render(
   <React.StrictMode>
-    <RegisterForm />
+    <PerfilPage />
   </React.StrictMode>,
   document.getElementById('root')
 );
