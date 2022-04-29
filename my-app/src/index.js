@@ -7,10 +7,12 @@ import reportWebVitals from './reportWebVitals';
 import Login from './Login';
 import RegisterForm from './Components/Register/RegisterForm';
 import PerfilPage from './Perfil';
+import GerenciadorPerfis from './Components/GerenciarPerfis/GerenciarPerfis.js';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <PerfilPage />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
