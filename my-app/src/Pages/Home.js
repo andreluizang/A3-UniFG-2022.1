@@ -1,6 +1,6 @@
 import './App.css';
-import HomePage from './Components/Home/HomePage';
-import Header from './Components/Home/Header';
+import HomePage from '../Components/Home/HomePage';
+import Header from '../Components/Home/Header';
 function Home() {
   return (
     <div className="Home">

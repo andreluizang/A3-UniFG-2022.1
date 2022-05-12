@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import foto_de_perfil from "./Foto_de_perfil.png";
-import voltar from "./Voltar.png";
+import foto_de_perfil from "../../assets/Foto_de_perfil.png";
+import voltar from "../../assets/Voltar.png";
 import "./Perfil.css";
 
 function Perfil() {
