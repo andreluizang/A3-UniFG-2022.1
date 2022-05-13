@@ -1,6 +1,7 @@
 import express from "express";
 import db from "./dbConnect.js";
 import filmes from './models/movies.js';
+import contas from './models/accounts.js';
 
 db.on("error", console.log.bind(console, 'Erro de conexão'));
 db.once("open", () => {
@@ -11,32 +12,38 @@ const app = express();
 
 app.use(express.json());
 
+//GET
 app.get('/', (req, res) => {
-    res.status(200).send("a");
+    res.status(200).send("HOME");
 });
 
-app.get('/register', (req, res) => {
-  res.status(200).send("Register");
-})
-
-app.get('/login', (req, res) => {
-  res.status(200).send("Login");
-})
-
 app.get('/movies', (req, res) => {
-    filmes.find((err,movies) => {
-        res.status(200).json(movies);
-    })
+  filmes.find((err,movies) => {
+      res.status(200).json(movies);
+  })
 })
 
-app.get('/profile', (req, res) => {
-  res.status(200).send("Perfil");
+app.get('/movies/:id', (req, res) => {
+  let id = req.params.id;
+  filmes.findById(id, (err,movies) => {
+      res.status(200).json(movies);
+  })
 })
 
-app.get('/admin', (req, res) => {
-  res.status(200).send("admin");
+app.get('/accounts/:id', (req, res) => {
+  let id = req.params.id;
+  contas.findById(id, (err,accounts) => {
+      res.status(200).json(accounts);
+  })
 })
 
+app.get('/accounts', (req, res) => {
+  contas.find((err,accounts) => {
+      res.status(200).json(accounts);
+  })
+})
+
+//POST
 app.post('/movies', (req, res) => {
   let filme = new filmes(req.body);
   filme.save((err) => {
@@ -44,6 +51,17 @@ app.post('/movies', (req, res) => {
           res.status(500).send({message: `${err.message} falha ao cadastrar o filme`});
       }else{
           res.status(201).send(filme.toJSON());
+      }
+  })
+});
+
+app.post('/accounts', (req, res) => {
+  let conta = new contas(req.body);
+  conta.save((err) => {
+      if(err){
+          res.status(500).send({message: `${err.message} falha ao cadastrar`});
+      }else{
+          res.status(201).send(conta.toJSON());
       }
   })
 });
@@ -60,6 +78,17 @@ app.put('/movies/:id', (req, res) =>{
   })
 });
 
+app.put('/accounts/:id', (req, res) =>{
+  const id = req.params.id;
+  contas.findByIdAndUpdate(id, {$set: req.body}, (err) => {
+      if(err){
+          res.status(500).send({message: err.message});
+      }else{
+          res.status(201).send({message: 'Atualizado com sucesso!'});
+      }
+  })
+});
+
 //DELETE
 app.delete('/movies/:id', (req, res) =>{
   const id = req.params.id;
@@ -68,6 +97,18 @@ app.delete('/movies/:id', (req, res) =>{
           res.status(500).send({message: err.message})
       }else{
           res.status(201).send({message: 'Filme deletado com sucesso!'});
+      }
+  })
+  
+});
+
+app.delete('/accounts/:id', (req, res) =>{
+  const id = req.params.id;
+  contas.findByIdAndDelete(id, (err) =>{
+      if(err){
+          res.status(500).send({message: err.message})
+      }else{
+          res.status(201).send({message: 'Conta deletada com sucesso!'});
       }
   })
   
