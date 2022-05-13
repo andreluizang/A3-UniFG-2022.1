@@ -3,9 +3,10 @@ import mongoose from 'mongoose';
 const contasSchema = new mongoose.Schema(
     {
         id: {type: String},
-        titulo: {type: String, required: true},
-        diretor: {type: String, required: true},
-        genero: {type: String, required: true},
+        nome: {type: String, required: true},
+        email: {type: String, required: true},
+        senha: {type: String, required: true},
+        admin: {type: Boolean, required: true},
     }
 )
 
