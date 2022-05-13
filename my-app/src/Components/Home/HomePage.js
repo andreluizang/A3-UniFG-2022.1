@@ -4,7 +4,7 @@ import UltimoFilme from './UltimoFilme.js';
 import Diretor from'./DiretorMaisVisto.js';
 import Genero from './GeneroMaisVisto.js';
 import Contagem from './ContagemFilmes.js'
-import Lista from './ListaFilmes';
+import Lista from './ListaFilmes.js';
 
 function HomePage(props) {
     const [state , setState] = useState({

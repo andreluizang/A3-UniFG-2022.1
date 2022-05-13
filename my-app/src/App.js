@@ -1,12 +1,12 @@
 import './App.css';
-import RegisterForm from './Components/Register/RegisterForm';
-import Header from './Components/Register/Header';
-import Filmes from "./Components/Filmes/Filmes"
+import HomePage from './Components/Home/HomePage.js';
+import Header from './Components/Register/Header.js';
 
 function App() {
   return (
     <div className="Application">
-      <Filmes/>
+      <Header/>
+      <HomePage/>
     </div>
   );
 }
