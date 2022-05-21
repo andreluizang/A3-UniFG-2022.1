@@ -28,6 +28,7 @@ mongoose.connect(`mongodb+srv://${dbUser}:${dbpassword}@cluster0.j4oft.mongodb.n
 function checkToken(req, res, next){
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(" ")[1]
+    console.log(req)
 
     if(!token){
         return res.status(401).json({message: "Acesso negado!"})
@@ -43,6 +44,20 @@ function checkToken(req, res, next){
     }
 }
 
+function checkAdminUser(req, res, next){
+    const admin = req.headers
+
+    console.log(admin)
+    
+    if(admin === true){
+        next()
+    }
+    else{
+        return res.status(401).json({message: "Acesso negado!"})
+    }
+
+}
+
 
 // Home
 app.get('/home', (req,res) => {
@@ -50,9 +65,15 @@ app.get('/home', (req,res) => {
 });
 
 
+// Admin - teste
+app.get('/admin', checkAdminUser, (req,res) => {
+    res.status(200).json({message: "Bem-vindo admin!"})
+});
+
+
 // Cadastro de usuário
 app.post('/cadastro', async (req,res) => {
-    const {nome, email, senha} = req.body
+    const {nome, email, senha, admin} = req.body
 
     if(!nome){
         return res.status(422).json({ message: 'O nome é obrigatório!'})
@@ -62,6 +83,9 @@ app.post('/cadastro', async (req,res) => {
     }
     if(!senha){
         return res.status(422).json({ message: 'A senha é obrigatório!'})
+    }
+    if(!admin){
+        admin = false
     }
 
     const perfilExists = await Perfil.findOne({email: email})
@@ -77,6 +101,7 @@ app.post('/cadastro', async (req,res) => {
         nome,
         email,
         senha: passwordHash,
+        admin,
     })
 
     try{
@@ -118,7 +143,7 @@ app.post("/login", async (req,res) => {
         const token = jwt.sign({
             id: perfil._id
         }, secret)
-
+        const admin = perfil.admin
         res.status(200).json({message: "Autenticação realizada com sucesso", token})
 
     } catch (error) {
@@ -141,6 +166,45 @@ app.get("/perfil/:id", checkToken, async (req, res) => {
 
     res.status(200).json({perfil})
 });
+
+
+// Atualiza o perfil do usuário
+app.put('/perfil/atualizar/:id', async (req, res) =>{
+    const id = req.params.id;
+    const {nome, email, senha, admin} = req.body
+
+    const salt = await bcrypt.genSalt(12)
+    const passwordHash = await bcrypt.hash(senha, salt)
+
+    const perfil = {
+        nome,
+        email,
+        senha: passwordHash,
+        admin,
+    }
+
+    Perfil.findByIdAndUpdate(id, {$set: perfil}, (err) => {
+        if(err){
+            res.status(500).send({message: err.message});
+        }else{
+            res.status(201).send({message: 'Perfil atualizado com sucesso!'});
+        }
+    })
+});
+
+
+// Apagar perfil do usuário - rota privada apenas para admin (incompleta)
+app.delete('/perfil/apagar/:id', checkAdminUser, (req, res) =>{
+    const id = req.params.id;
+    contas.findByIdAndDelete(id, (err) =>{
+        if(err){
+            res.status(500).send({message: err.message})
+        }else{
+            res.status(201).send({message: 'Conta deletada com sucesso!'});
+        }
+    })
+    
+  });
 
 
 // Cadastro de filme
