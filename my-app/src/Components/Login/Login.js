@@ -1,19 +1,32 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
+
 
 function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const navigate = useNavigate()
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
     if(email !== "" && password !== ""){
-      console.log(email)
-      console.log(password)
+      axios.post('http://localhost:3000/login', {
+        tipo: "LoginRealizado",
+        dados: {
+          email,
+          password,
+        }
+      })
     }
     else{
       window.alert("Digite um email e/ou senha")
     }
+  }
+
+  const redirectToRegister = () => {
+    navigate('/cadastro')
   }
 
   return (
@@ -47,7 +60,7 @@ function Login() {
             <div className="link-register">
               <span className="txt1">Não tem uma conta?</span>
 
-              <a className="txt2" href="#">Crie uma!</a>
+              <div className="txt2" onClick={redirectToRegister}>Crie uma!</div>
             </div>
 
             <div className="container-login-form-btn">

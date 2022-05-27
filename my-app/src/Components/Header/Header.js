@@ -1,4 +1,4 @@
-import Foto_de_perfil from "../../Assets/Foto_de_perfil.png"
+import Foto_de_perfil from "../../assets/Foto_de_perfil.png"
 import "./Header.css"
 
 function Header() {

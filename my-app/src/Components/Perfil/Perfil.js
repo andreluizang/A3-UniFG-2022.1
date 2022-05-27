@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import foto_de_perfil from "../../assets/Foto_de_perfil.png";
 import voltar from "../../assets/Voltar.png";
 import "./Perfil.css";
@@ -7,6 +8,7 @@ function Perfil() {
     const [nome, setNome] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate()
 
     const handleDeleteClick = (e) => {
         e.preventDefault();
@@ -16,14 +18,18 @@ function Perfil() {
         e.preventDefault();
     }
 
+    const handleBackClick = () => {
+        navigate('/')
+    };
+
     return (
-        <div className="container">
+        <div className="container-primario">
             <div className="container-perfil">
                 <div className="wrap-perfil">
                     <form className="perfil">
 
-                        <span className="link-home">
-                            <img src={voltar} alt="Voltar" />
+                        <span className="link-home" >
+                            <img src={voltar} alt="Voltar" onClick={handleBackClick} />
                         </span>
 
                         <span className="imagem-perfil">

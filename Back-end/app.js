@@ -28,7 +28,6 @@ mongoose.connect(`mongodb+srv://${dbUser}:${dbpassword}@cluster0.j4oft.mongodb.n
 function checkToken(req, res, next){
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(" ")[1]
-    console.log(req)
 
     if(!token){
         return res.status(401).json({message: "Acesso negado!"})
@@ -85,7 +84,7 @@ app.post('/cadastro', async (req,res) => {
         return res.status(422).json({ message: 'A senha é obrigatório!'})
     }
     if(!admin){
-        admin = false
+        admin === false
     }
 
     const perfilExists = await Perfil.findOne({email: email})

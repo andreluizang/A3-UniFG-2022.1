@@ -1,12 +1,12 @@
-import './App.css';
+import React from 'react';
 import Login from '../Components/Login/Login.js';
 
-function LoginPg() {
-  return (
-    <div className="Login">
-      <Login/>
-    </div>
-  );
+function LoginPage() {
+  return(
+    <>
+      <Login />
+    </>
+  )
 }
 
-export default LoginPg;
+export default LoginPage;

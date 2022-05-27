@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.container{
+.container-primario{
     width:  100%;
     margin: 0 auto;
 }
@@ -60,6 +60,10 @@
     cursor: pointer;
 }
 
+.link-home > img{
+    width: 20px;
+}
+
 .wrap-input{
     width: 100%;
     position: relative;
@@ -94,7 +98,7 @@
     line-height: 1.2;
     justify-content: center;
     align-items: center;
-    border-radius: 2px;
+    border-radius: 5px;
     border: none;
     display: flex;
     margin-top: 20px;
@@ -115,7 +119,7 @@
     line-height: 1.2;
     justify-content: center;
     align-items: center;
-    border-radius: 2px;
+    border-radius: 5px;
     border: none;
     display: flex;
     margin-top: 20px;

@@ -1,5 +1,5 @@
 import React from "react";
-import Delete from "../../Assets/Delete.png";
+import Delete from "../../assets/Delete.png";
 import "./CardPerfil.css";
 
 function CardPerfil({ id, name, handleRemove }) {

@@ -1,5 +1,5 @@
-import './App.css';
-import Perfil from '../Components/Perfil/Perfil';
+import React from 'react';
+import Perfil from '../Components/Perfil/Perfil.js';
 
 function PerfilPage() {
   return (
