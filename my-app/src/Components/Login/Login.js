@@ -19,6 +19,7 @@ function Login() {
           password,
         }
       })
+    navigate('/')
     }
     else{
       window.alert("Digite um email e/ou senha")

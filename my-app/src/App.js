@@ -18,9 +18,9 @@ function App() {
 
         <Route path='/Perfil' element={<Perfil />} />
 
-        <Route path='/PerfilAdmin' element={<PerfilAdmin />} />
+        <Route path='/Admin' element={<PerfilAdmin />} />
 
-        <Route path='/Register' element={<RegisterForm />} />
+        <Route path='/Cadastro' element={<RegisterForm />} />
       </Routes>
     </Router>
   );

@@ -1,18 +1,26 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 function RegisterForm() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const navigate = useNavigate();
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
     if(email !== "" && password !== ""){
-      console.log(email)
-      console.log(password)
-      console.log(confirmPassword)
-      if(password==confirmPassword){
-          alert("Cadastro realizado com sucesso!")
+      if(password === confirmPassword){
+        axios.post('http://localhost:3000/login', {
+          tipo: "CadastroRealizado",
+          dados: {
+            email,
+            password,
+          }
+        })
+        navigate('/login')
+        alert("Cadastro realizado com sucesso!")
       }else{
           alert("As senhas não são iguais!")
       }
@@ -20,6 +28,10 @@ function RegisterForm() {
     else{
       window.alert("Digite um email e/ou senha")
     }
+  }
+
+  const redirectToLogin = () =>{
+      navigate('/login')
   }
 
   return (
@@ -63,7 +75,7 @@ function RegisterForm() {
             <div className="link-register">
               <span className="txt1">Já tem uma conta?</span>
 
-              <a className="txt2" href="#">Faça login!</a>
+              <div className="txt2" onClick={redirectToLogin}>Faça login!</div>
             </div>
 
             <div className="container-login-form-btn">
