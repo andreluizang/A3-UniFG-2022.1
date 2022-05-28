@@ -10,25 +10,19 @@ import { history } from './history.js';
 
 function App() {
   return (
-    <div className='Login'>
-      <Login/>
-    </div>
-    
-    /* 
     <Router history={ history }>
       <Routes>
         <Route path='/Login' element={<Login />} />
 
-        <PrivateRoute path='/' element={<Home />} />
+        <Route path='/' element={<Home />} />
 
-        <PrivateRoute path='/Perfil' element={<Perfil />} />
+        <Route path='/Perfil' element={<Perfil />} />
 
-        <PrivateRoute path='/PerfilAdmin' element={<PerfilAdmin />} />
+        <Route path='/PerfilAdmin' element={<PerfilAdmin />} />
 
         <Route path='/Register' element={<RegisterForm />} />
       </Routes>
     </Router>
-    */
   );
 }
 
