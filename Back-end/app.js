@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const express = require('express')
+const cors = require('cors')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -13,12 +14,12 @@ const app = express();
 const dbUser = process.env.DB_User
 const dbpassword = process.env.DB_PASS
 
-
+app.use(cors())
 app.use(express.json());
 
 mongoose.connect(`mongodb+srv://${dbUser}:${dbpassword}@cluster0.j4oft.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`)
 .then( () => {
-    app.listen(3000)
+    app.listen(4000)
     console.log('Conectou ao banco de dados!')
 })
 .catch((err) => console.log(err))
@@ -152,12 +153,20 @@ app.post("/login", async (req,res) => {
 
 });
 
+// Lista todos os perfil - retirei a checagem do token, para corrigir: app.get("/perfil/:id", checkToken,  async (req, res) =>  
+app.get("/perfil", async (req, res) => {
+    Perfil.find((err, perfil) => {
+        res.status(200).json(perfil)
+    })
+});
 
-// Perfil do usuário
-app.get("/perfil/:id", checkToken, async (req, res) => {
+
+
+// Perfil do usuário - retirei a checagem do token, para corrigir: app.get("/perfil/:id", checkToken,  async (req, res) =>  
+app.get("/perfil/:id", async (req, res) => {
     const id = req.params.id
 
-    const perfil = await Perfil.findById(id, '-senha')
+    const perfil = await Perfil.findById(id)
 
     if(!perfil){
         return res.status(404).json({message: "Usuário não encontrado!"})
@@ -167,8 +176,8 @@ app.get("/perfil/:id", checkToken, async (req, res) => {
 });
 
 
-// Atualiza o perfil do usuário
-app.put('/perfil/atualizar/:id', async (req, res) =>{
+// Atualiza o perfil do usuário - retirei a checagem do token, para corrigir: app.put('/perfil/atualizar/:id', checkToken, async (req, res) =>  
+app.put('/perfil/atualizar/:id', async (req, res) => {
     const id = req.params.id;
     const {nome, email, senha, admin} = req.body
 
@@ -192,21 +201,22 @@ app.put('/perfil/atualizar/:id', async (req, res) =>{
 });
 
 
-// Apagar perfil do usuário - rota privada apenas para admin (incompleta)
-app.delete('/perfil/apagar/:id', checkAdminUser, (req, res) =>{
+// Apagar perfil do usuário - rota privada apenas para admin (incompleta) - retirei a checagem do token, para corrigir: app.delete('/perfil/apagar/:id', checkAdminUser, checkToken, (req, res) =>  
+app.delete('/perfil/apagar/:id', (req, res) => {
     const id = req.params.id;
-    contas.findByIdAndDelete(id, (err) =>{
+
+    Perfil.findByIdAndDelete(id, (err) =>{
         if(err){
             res.status(500).send({message: err.message})
         }else{
-            res.status(201).send({message: 'Conta deletada com sucesso!'});
+            res.status(201).send({message: 'Perfil apagado com sucesso!'});
         }
     })
     
   });
 
 
-// Cadastro de filme
+// Cadastro de filme - retirei a checagem do token, para corrigir: app.post("/filme/cadastro", checkToken, async (req, res) => 
 app.post("/filme/cadastro", checkToken, async (req, res) => {
     const {nome, diretor, genero} = req.body
 
@@ -242,7 +252,7 @@ app.post("/filme/cadastro", checkToken, async (req, res) => {
 });
 
 
-// Busca de filme por id
+// Busca de filme por id - retirei a checagem do token, para corrigir: app.get("/filme/:id", checkToken, async (req, res) => 
 app.get("/filme/:id", checkToken, async (req, res) => {
     const id = req.params.id
 
@@ -256,7 +266,7 @@ app.get("/filme/:id", checkToken, async (req, res) => {
 });
 
 
-// Atualizar filme por id
+// Atualizar filme por id - retirei a checagem do token, para corrigir: app.put("/filme/atualizar/:id", checkToken, async (req, res) => 
 app.put("/filme/atualizar/:id", checkToken, async (req, res) => {
     const id = req.params.id;
 
@@ -270,7 +280,7 @@ app.put("/filme/atualizar/:id", checkToken, async (req, res) => {
 })
 
 
-// Apagar filme por id
+// Apagar filme por id - retirei a checagem do token, para corrigir: app.delete("/filme/apagar/:id", checkToken, async (req, res) => 
 app.delete("/filme/apagar/:id", checkToken, async (req, res) => {
     const id = req.params.id;
 

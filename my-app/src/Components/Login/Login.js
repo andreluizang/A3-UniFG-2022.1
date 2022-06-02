@@ -5,25 +5,17 @@ import "./Login.css";
 
 
 function Login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const navigate = useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const baseURL = "http://localhost:4000"
+
+  const navigate = useNavigate();
+
+  
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
-    if(email !== "" && password !== ""){
-      axios.post('http://localhost:3000/login', {
-        tipo: "LoginRealizado",
-        dados: {
-          email,
-          password,
-        }
-      })
-    navigate('/')
-    }
-    else{
-      window.alert("Digite um email e/ou senha")
-    }
   }
 
   const redirectToRegister = () => {
@@ -31,7 +23,7 @@ function Login() {
   }
 
   return (
-    <div className="container">
+    <div className="container-primario-login">
       <div className="container-login">
         <div className="wrap-login">
           <form className="login-form">
