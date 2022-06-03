@@ -153,7 +153,7 @@ app.post("/login", async (req,res) => {
 
 });
 
-// Lista todos os perfil - retirei a checagem do token, para corrigir: app.get("/perfil/:id", checkToken,  async (req, res) =>  
+// Lista todos os perfis - retirei a checagem do token, para corrigir: app.get("/perfil/:id", checkToken,  async (req, res) =>  
 app.get("/perfil", async (req, res) => {
     Perfil.find((err, perfil) => {
         res.status(200).json(perfil)

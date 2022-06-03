@@ -23,7 +23,10 @@ function Perfil() {
                 setEmail(response.data.perfil.email || "")
                 setPassword(response.data.perfil.senha || "")
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error)
+                alert(JSON.stringify(error.response.data.message))
+            })
     };
 
     function updateProfile(nome, email, password, URL, id) {
@@ -41,7 +44,8 @@ function Perfil() {
     function deleteProfile(URL, id) {
         axios.delete(`${URL}/perfil/apagar/${id}`)
         .then(response => {
-          alert(JSON.stringify(response.data.message))
+          window.confirm(JSON.stringify(response.data.message))
+          navigate('/Login');
         })
         .catch(error => console.error(error));
     };
@@ -54,7 +58,6 @@ function Perfil() {
     const handleDeleteClick = (e) => {
         e.preventDefault();
         deleteProfile(baseURL, idPerfil);
-        navigate('/Login');
     }
 
     const handleSaveClick = (e) => {

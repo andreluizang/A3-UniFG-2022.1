@@ -1,19 +1,29 @@
+import axios from 'axios';
 import React, { useState, useEffect } from "react";
 import CardPerfil from "../Components/CardPerfil/CardPerfil.js";
 import Header from "../Components/Header/Header.js";
 import "./AdminProfilePage.css";
 
 function AdminProfilePage() {
-
     const [perfil, setPerfil] = useState([])
+    
+    const baseURL = "http://localhost:4000"
+    
+    function getProfile(URL) {
+        axios.get(`${URL}/perfil`)
+            .then(response => {
+                console.log(response.data)
+                setPerfil(response.data || null)
+            })
+            .catch(error => {
+                console.log(error)
+                alert(JSON.stringify(error.response.data.message))
+            })
+    };
 
     useEffect(() => {
-        //aqui vai fazer a busca dos dados na api
+        getProfile(baseURL)
     }, [])
-
-    function removeProfile(id){
-        //método delete
-    }
 
     return (
         <div className="container-admin-page">
@@ -27,7 +37,7 @@ function AdminProfilePage() {
                         <span>Perfis cadastrados:</span>
                     </div>
                     <div className="card-perfil">
-                        <CardPerfil id={1} name={"alguém"} handleRemove={removeProfile}/>
+                        {perfil.map(p => <CardPerfil perfil={p} get={getProfile} />)}
                     </div>
                 </div>
                 

@@ -12,10 +12,30 @@ function Login() {
 
   const navigate = useNavigate();
 
-  
+  function login(email, password, URL) {
+    if (email !== "" && password !== "") {
+      axios.post(`${URL}/login`, {
+        email,
+        senha: password,
+      })
+      .then(response => {
+        alert(JSON.stringify(response.data.message))
+        console.log(response.data)
+        navigate('/')
+      })
+      .catch(error => {
+        console.error(error)
+        alert(JSON.stringify(error.response.data.message))
+      });
+    }
+    else {
+      window.alert("Digite um email e/ou senha")
+    }
+  }
 
   const handleSubmitClick = (e) => {
     e.preventDefault();
+    login(email, password, baseURL);
   }
 
   const redirectToRegister = () => {
