@@ -9,6 +9,7 @@ function Login() {
   const [password, setPassword] = useState("");
 
   const baseURL = "http://localhost:4000"
+  var token = ""
 
   const navigate = useNavigate();
 
@@ -19,8 +20,8 @@ function Login() {
         senha: password,
       })
       .then(response => {
-        alert(JSON.stringify(response.data.message))
         console.log(response.data)
+        token = response.data.token
         navigate('/')
       })
       .catch(error => {

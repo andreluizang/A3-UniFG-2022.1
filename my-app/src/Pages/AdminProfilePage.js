@@ -21,6 +21,7 @@ function AdminProfilePage() {
             })
     };
 
+
     useEffect(() => {
         getProfile(baseURL)
     }, [])
