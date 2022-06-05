@@ -19,7 +19,7 @@ app.use(express.json());
 
 mongoose.connect(`mongodb+srv://${dbUser}:${dbpassword}@cluster0.j4oft.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`)
 .then( () => {
-    app.listen(4000)
+    app.listen(process.env.PORT || 4000)
     console.log('Conectou ao banco de dados!')
 })
 .catch((err) => console.log(err))

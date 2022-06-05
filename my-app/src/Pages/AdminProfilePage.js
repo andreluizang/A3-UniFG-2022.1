@@ -7,7 +7,7 @@ import "./AdminProfilePage.css";
 function AdminProfilePage() {
     const [perfil, setPerfil] = useState([])
     
-    const baseURL = "http://localhost:4000"
+    const baseURL = process.env.REACT_APP_API_URL || "http://localhost:4000"
     
     function getProfile(URL) {
         axios.get(`${URL}/perfil`)
@@ -20,6 +20,16 @@ function AdminProfilePage() {
                 alert(JSON.stringify(error.response.data.message))
             })
     };
+
+
+    function removeProfile(id){
+        axios.delete(`${baseURL}/perfil/apagar/${id}`)
+        .then(response => {
+            window.confirm(JSON.stringify(response.data.message))
+            getProfile(baseURL);
+        })
+        .catch(error => console.error(error));
+    }
 
 
     useEffect(() => {
@@ -38,7 +48,7 @@ function AdminProfilePage() {
                         <span>Perfis cadastrados:</span>
                     </div>
                     <div className="card-perfil">
-                        {perfil.map(p => <CardPerfil perfil={p} get={getProfile} />)}
+                        {perfil.map(p => <CardPerfil perfil={p} deleteProfile={removeProfile} />)}
                     </div>
                 </div>
                 
